@@ -1,6 +1,6 @@
 package com.mastering.spring.springboot.controller;
 
-import com.mastering.spring.springboot.DemoApplication;
+import com.mastering.spring.springboot.FirstSpringBootExampleApplication;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = DemoApplication.class,
+@SpringBootTest(classes = FirstSpringBootExampleApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TodoControllerIT {
     @LocalServerPort
@@ -29,6 +29,7 @@ public class TodoControllerIT {
                 template.getForEntity(createUrl(uri), String.class);
         JSONAssert.assertEquals(expected, response.getBody(), false);
     }
+
     private String createUrl(String uri) {
         return "http://localhost:" + port + uri;
     }

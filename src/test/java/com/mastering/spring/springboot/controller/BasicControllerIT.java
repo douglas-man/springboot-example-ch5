@@ -1,6 +1,6 @@
 package com.mastering.spring.springboot.controller;
 
-import com.mastering.spring.springboot.DemoApplication;
+import com.mastering.spring.springboot.FirstSpringBootExampleApplication;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = DemoApplication.class,
+@SpringBootTest(classes = FirstSpringBootExampleApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class BasicControllerIT {
 
