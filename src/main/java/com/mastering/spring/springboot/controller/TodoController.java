@@ -1,10 +1,15 @@
 package com.mastering.spring.springboot.controller;
 
+import com.mastering.spring.springboot.bean.ExceptionResponse;
 import com.mastering.spring.springboot.bean.Todo;
 import com.mastering.spring.springboot.bean.TodoNotFoundException;
 import com.mastering.spring.springboot.service.TodoService;
 //import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -26,10 +31,19 @@ public class TodoController {
 
     @Operation(
             summary = "Retrieve all todos for a user by passing in his name",
-            description = "A list of matching todos is returned. Current pagination is not supported.",
+            description = "A list of matching todos is returned. Current pagination is not supported.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "List of Todos",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Todo.class))}),
+            @ApiResponse(responseCode = "404", description = "Todo not found",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ExceptionResponse.class))})
+    })
+/*    ,
             response = Todo.class,
             responseContainer = "List",
-            produces = "application/json")
+            produces = "application/json")*/
     @GetMapping("/users/{name}/todos")
     public List<Todo> retrieveTodos(@PathVariable String name) {
         return todoService.retrieveTodos(name);
