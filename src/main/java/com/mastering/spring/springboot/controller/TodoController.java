@@ -3,6 +3,8 @@ package com.mastering.spring.springboot.controller;
 import com.mastering.spring.springboot.bean.Todo;
 import com.mastering.spring.springboot.bean.TodoNotFoundException;
 import com.mastering.spring.springboot.service.TodoService;
+//import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -22,6 +24,12 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
+    @Operation(
+            summary = "Retrieve all todos for a user by passing in his name",
+            description = "A list of matching todos is returned. Current pagination is not supported.",
+            response = Todo.class,
+            responseContainer = "List",
+            produces = "application/json")
     @GetMapping("/users/{name}/todos")
     public List<Todo> retrieveTodos(@PathVariable String name) {
         return todoService.retrieveTodos(name);

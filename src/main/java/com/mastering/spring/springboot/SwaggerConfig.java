@@ -1,5 +1,6 @@
 package com.mastering.spring.springboot;
 
+import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
@@ -12,10 +13,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
     @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
+    public GroupedOpenApi api() {
+        return GroupedOpenApi.builder()
+              //  .select()
                 .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any()).build();
+                .pathsToMatch(PathSelectors.any()).build();
     }
 }
